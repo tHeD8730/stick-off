@@ -7,6 +7,13 @@ import (
 	"time"
 )
 
+func selfPing(url string) {
+	for {
+		time.Sleep(0.8 * time.Minute)
+		http.Get(url)
+	}
+}
+
 func main() {
 	hub := newHub()
 	go hub.run()
@@ -30,6 +37,11 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
+	}
+
+	appUrl := os.Getenv("APP_URL)
+	if appUrl != "" {
+		go selfPing(appUrl + "/health")
 	}
 
 	log.Printf("Last Stick server listening on :%s", port)
