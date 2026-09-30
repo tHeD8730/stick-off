@@ -14,7 +14,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	// Serve the frontend
-	mux.Handle("/", http.FileServer(http.Dir("../frontend")))
+	mux.Handle("/", http.FileServer(http.Dir("./frontend")))
 
 	// WebSocket endpoint
 	mux.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
